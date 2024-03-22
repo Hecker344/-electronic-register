@@ -1,1 +1,71 @@
-d
+import datetime as dt
+import csv
+
+login={
+    'prof':{
+        'Gino':"ciaone"
+    },
+    'studenti':{
+        'Toni':"Mucca"
+    }
+    }
+
+
+scelt=int(input("Se sei un prof premi 0, se sei uno studente premi 1: "))
+if scelt==0:
+    nomut=input("Inserisci il nome utente: ")
+    psw=input("Inserisci la password: ")
+    if login['prof'].get(nomut)==login['prof'][nomut] and psw==login['prof'][nomut]:
+        print("Login eseguito!")
+elif scelt==1:
+    nomut=input("Inserisci il nome utente: ")
+    psw=input("Inserisci la password: ")
+    if login['studenti'].get(nomut)==login['studenti'][nomut] and psw==login['studenti'][nomut]:
+        print("Login eseguito!")
+else:
+    print("opzione non esistente")
+
+
+print(login)
+
+
+
+import csv
+fieldnames = ['prof','studenti']#intestazioni csv
+#dati csv 
+
+login=[
+    {
+        'prof':{
+            'Gino':["Gino","ciaone"],
+            'Bino':["Bino","tino"]
+            
+        }
+        
+    },
+    {
+        'studenti':{
+            'Toni':["Toni","mucca"],
+            'Fino':["Buino","tamino"]
+        }
+        
+    }
+        ]
+with open('stati.csv', 'w', encoding='UTF8', newline='') as f:#apro per contrllo- l'ultimo metodo toglie la riga vuota che
+#solitamente c'è fra dati e intestazioni
+    writer = csv.DictWriter(f, fieldnames=fieldnames) #nome delfile e la lista con intestazioni
+    writer.writeheader()#scrivo intestazione
+    writer.writerows(login)#scrivo riga per volta
+ 
+login1=[{},{}]
+k=0
+with open("stati.csv") as csvfile:
+  spamreader = csv.reader(csvfile)
+  for row in spamreader:
+        print(row[0])
+        if k==0:
+            n=row[0]
+        elif k==1:
+            login1[0][n]=row[0]
+        k=k+1
+print(login1)
