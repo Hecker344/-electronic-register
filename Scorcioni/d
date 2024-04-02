@@ -1,39 +1,6 @@
 import datetime as dt
 import csv
 
-login={
-    'prof':{
-        'Gino':"ciaone"
-    },
-    'studenti':{
-        'Toni':"Mucca"
-    }
-    }
-
-
-scelt=int(input("Se sei un prof premi 0, se sei uno studente premi 1: "))
-if scelt==0:
-    nomut=input("Inserisci il nome utente: ")
-    psw=input("Inserisci la password: ")
-    if login['prof'].get(nomut)==login['prof'][nomut] and psw==login['prof'][nomut]:
-        print("Login eseguito!")
-elif scelt==1:
-    nomut=input("Inserisci il nome utente: ")
-    psw=input("Inserisci la password: ")
-    if login['studenti'].get(nomut)==login['studenti'][nomut] and psw==login['studenti'][nomut]:
-        print("Login eseguito!")
-else:
-    print("opzione non esistente")
-
-
-print(login)
-
-
-
-import csv
-fieldnames = ['prof','studenti']#intestazioni csv
-#dati csv 
-
 login=[
     {
         'prof':{
@@ -51,21 +18,94 @@ login=[
         
     }
         ]
-with open('stati.csv', 'w', encoding='UTF8', newline='') as f:#apro per contrllo- l'ultimo metodo toglie la riga vuota che
+
+scelt=int(input("Se sei un prof premi 0, se sei uno studente premi 1: "))
+if scelt==0:
+    nomut=input("Inserisci il nome utente: ")
+    psw=input("Inserisci la password: ")
+    if nomut==login[0]['prof'][nomut][0] and psw==login[0]['prof'][nomut][1]:
+        print("Login eseguito!")
+elif scelt==1:
+    nomut=input("Inserisci il nome utente: ")
+    psw=input("Inserisci la password: ")
+    if nomut==login[0]['studenti'][nomut][0] and psw==login[1]['studenti'][nomut]:
+        print("Login eseguito!")
+else:
+    print("opzione non esistente")
+
+
+print(login)
+
+
+
+import csv
+fieldnames = ['prof','studenti']#intestazioni csv
+#dati csv 
+
+
+with open('login.csv', 'w', encoding='UTF8', newline='') as f:#apro per contrllo- l'ultimo metodo toglie la riga vuota che
 #solitamente c'è fra dati e intestazioni
     writer = csv.DictWriter(f, fieldnames=fieldnames) #nome delfile e la lista con intestazioni
     writer.writeheader()#scrivo intestazione
     writer.writerows(login)#scrivo riga per volta
- 
+
 login1=[{},{}]
-k=0
-with open("stati.csv") as csvfile:
+k=0;k1=0; j=1; m=""; m1=""
+with open("login.csv") as csvfile:
   spamreader = csv.reader(csvfile)
   for row in spamreader:
         print(row[0])
         if k==0:
             n=row[0]
+            t=row[1]
         elif k==1:
-            login1[0][n]=row[0]
+            s=row[0]
+            login1[0][n]={}
+        elif k==2:
+            s1=row[1]
+            login1[1][t]={}
         k=k+1
+print(login1)
+#while j!=0:
+print(s)
+print()
+stopper=s.count("],")+1
+while stopper!=0:
+    if stopper==s.count("],")+1:
+        len1=s.find(":")
+        len2=s.find(",")
+        len3=s.find("],")
+        iniz=0
+    else:
+        iniz=s.find("],")
+        len1=s.find(":", (s.find(":")+1))
+        len2=s.find(",", (s.find(",")+1))
+        len3=s.find("],", (s.find("],")+1))
+    for l in range(iniz,(len1+1)):
+        if s[l]!="{" and s[l]!="'" and s[l]!=":" and s[l]!=" " and s[l]!="]":
+            if s[l]!="[" and s[l]!=",":
+                m=m+s[l]
+    print(m)
+    for l in range((len1),(len2)):
+        if s[l]!="{" and s[l]!="'" and s[l]!=":" and s[l]!=" ":
+            if s[l]!="[" and s[l]!=",":
+                    m1=m1+s[l]
+    print(m1)
+    if k1==0:
+        login1[0][n][m]=[]
+    login1[0][n][m].append(m1)
+    m1=""
+    for l in range((len2),(len3)):
+        if s[l]!="{" and s[l]!="'" and s[l]!=":" and s[l]!=" ":
+            if s[l]!="[" and s[l]!=",":
+                    m1=m1+s[l]
+    print(m1)
+    login1[0][n][m].append(m1)
+    k1=k1+1
+    m=""
+    m1=""
+    k1=0
+    stopper=stopper-1
+print(m)
+print(m1)
 print(login1)
