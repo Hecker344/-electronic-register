@@ -38,6 +38,39 @@ print(login)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import csv
 fieldnames = ['prof','studenti']#intestazioni csv
 #dati csv 
