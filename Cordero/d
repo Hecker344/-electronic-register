@@ -1,2 +1,15 @@
-d
+def nuovo_studente(aule):
+    classe = 'terza_h'
+    cognome = str(input("Inserire il cognome dello studente da aggiungere:"))
+    aule[classe][cognome] = {'matematica':[], 'italiano':[], 'storia':[]}
+    return aule
+
+def nuovo_voto(aule):
+    classe = 'terza_h'
+    cognome = str(input("Inserire il cognome:"))
+    materia = 'matematica'
+    voto = int(input("Inserisci il nuovo voto da aggiungere:"))
+    voti = aule[classe][cognome][materia]
+    voti.append(voto)
+    return aule
   
