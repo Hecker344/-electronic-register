@@ -15,7 +15,9 @@ gui (user friendly) —> Comastri
 5,6 —> Bonfatti
 
 1 (studente) —> Cordero
+
 2 (studente) —> Comsatri
+
 3 (studente) —> Bonfatti
 
 SE ABBIAMO TEMPO
