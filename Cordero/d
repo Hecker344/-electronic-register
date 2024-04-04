@@ -108,18 +108,18 @@ classi = {
                                     }
         }
 }
-def nuovo_studente(aule):
-    classe = 'terza_h'
-    cognome = str(input("Inserire il cognome dello studente da aggiungere:"))
-    aule[classe][cognome] = {'matematica':[], 'italiano':[], 'storia':[]}
-    return aule
+def nuovo_studente(aule):   # questa riga definisce la funzione nuovo_studenti
+    classe = 'terza_h' # assegnamento di classe al valore 'terza_h'
+    cognome = str(input("Inserire il cognome dello studente da aggiungere:")) # inserimento del cognome dello studente
+    aule[classe][cognome] = {'matematica':[], 'italiano':[], 'storia':[]} # questa riga aggiunge il cognome al dizionario classi
+    return aule  # restituisce il dizionario con lo studente aggiunto
 
-def nuovo_voto(aule):
-    classe = 'terza_h'
-    cognome = str(input("Inserire il cognome:"))
-    materia = 'matematica'
-    voto = int(input("Inserisci il nuovo voto da aggiungere:"))
-    voti = aule[classe][cognome][materia]
-    voti.append(voto)
-    return aule
+def nuovo_voto(aule): # definisco la funzione nuovo_voto 
+    classe = 'terza_h' # assegnamento di classe al valore 'terza_h'
+    cognome = str(input("Inserire il cognome:")) # richiediamo all'utente di inserire il cognome
+    materia = 'matematica' # assegnamo alla variabile materia il valore 'matematica'
+    voto = int(input("Inserisci il nuovo voto da aggiungere:")) # chiediam di inserire un nuovo voto
+    voti = aule[classe][cognome][materia] # abbiamo ogni singolo voto dello studenti con la materia specificata
+    voti.append(voto) # aggiunge il nuovo voto ai voti precedenti
+    return aule # restituisce il dizionario con i voti aggiunti
   
