@@ -127,19 +127,19 @@ classi = {
 }
 
 
-def andamento_materia():
-    print('1. matematica')
+def andamento_materia():   # definisco una funzione per l'andamento della materia
+    print('1. matematica') # stampa le materie nella quale posso visualizzare l'andamento
     print('2. storia')
     print('3. inglese')
     print('4. italiano')
     print('5. informatica')
 
-    classe = 'terza_h'
+    classe = 'terza_h'  # definisco la classe e lo studente
     cognome = 'gazzotti'
 
-    opzione = int(input("Quale materia vuoi visualizzare"))
+    opzione = int(input("Quale materia vuoi visualizzare"))  # si richiede all'utente di scegliere una materia
 
-    if opzione == 1:
+    if opzione == 1:       # assegna a materia in base alla scelta del dell'utente
 
         mat = 'matematica'
 
@@ -160,21 +160,21 @@ def andamento_materia():
 
         mat = 'informatica'
 
-    voti = classi[classe][cognome][mat]
+    voti = classi[classe][cognome][mat]   # ottengo i voti dello studente per la materia selezionata
 
-    print(voti)
+    print(voti)  #stampo i voti 
 
-    plt.plot(range(1, len(voti) + 1), voti, marker="o", linestyle='-', color='r')
+    plt.plot(range(1, len(voti) + 1), voti, marker="o", linestyle='-', color='r')  # crea un grafico dove il primo argomento è l'asse delle x e il secondo è l'asse delle y
 
-    plt.title('materie')
+    plt.title('materie')  # titoli delle materie
 
-    plt.xlabel('Verifiche')
+    plt.xlabel('Verifiche')   # etichetta sull'asse delle x
 
-    plt.ylabel('Voti')
+    plt.ylabel('Voti')   # etichetta sull'asse della y
 
-    plt.grid(True)
+    plt.grid(True)   # attiva la griglia del grafico
 
-    plt.show()
+    plt.show()  # mostra il grafico
 
 
 andamento_materia()
