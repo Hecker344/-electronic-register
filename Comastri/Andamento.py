@@ -7,9 +7,8 @@ def Andamento():
         voti = classi[classe][cognome][materia_prof] #attribuiamo a una variabile i voti per comodità
         somma=0
         for x in voti:
-            somma=somma+voti[x] #facciamo un ciclo per sommare fra di loro tutti i voti
-        media=somma/len(voti) #facciamo la media 
+            somma=somma+x #facciamo un ciclo per sommare fra di loro tutti i voti
+        media=somma/len(voti) #facciamo la media
         print("La media di",cognome,"in",materia_prof,"è:",media) #mandiamo in out la media
     else:
         print(cognome,"in",materia_prof,"non ha voti") #nel caso in qui lo studente non abbia voti:
-Andamento()
