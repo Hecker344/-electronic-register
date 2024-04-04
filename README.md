@@ -28,4 +28,5 @@ html con db —> TUTTI
 
 ISTITUTO→CLASSI→STUDENTI&PROF→ MATERIE
 
-https://docs.google.com/document/d/1adFIvwMmCQz38-PTpYGMe4XnEkvKtrkf3D3AhW7BPzY/edit?usp=sharing
+RELAZIONE : https://docs.google.com/document/d/1adFIvwMmCQz38-PTpYGMe4XnEkvKtrkf3D3AhW7BPzY/edit?usp=sharing
+MODULO C : https://docs.google.com/document/d/1ZNRWAVXTfzwwIXOYZJQMt8xBjR-oOI0qL3wPQ_oW_dY/edit
