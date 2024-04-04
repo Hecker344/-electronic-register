@@ -4,17 +4,19 @@ An electronic register build in python
 
 LIBRERIA DATETIME usabile
 
-fase di login: criptata (forse) —> Scorcioni
+fase di login —> Scorcioni
 
-gui (user friendly) —> Comastri (Vaglio Scorcioni or Bonfatti)
+gui (user friendly) —> Comastri
 
 1,2 —> Cordero
 
 3,4 —> Comastri
 
-5,6 —> Bonfatti & Scorcioni
+5,6 —> Bonfatti
 
-1,2,3 (studente) —> Bonfatti & Scorcioni
+1 (studente) —> Cordero
+2 (studente) —> Comsatri
+3 (studente) —> Bonfatti
 
 SE ABBIAMO TEMPO
 
