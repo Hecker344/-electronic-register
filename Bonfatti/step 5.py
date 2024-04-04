@@ -1,9 +1,10 @@
-def media(nome, materia, diz):
 
-    tot = sum(diz[nome][materia])
-    numero = len(diz[nome][materia])
+def media(nome, materia, diz): #definisco la funzione che esegue la media di una materia
 
-    return round(tot/numero, 1)
+    tot = sum(diz[nome][materia]) #sommatoria degli elementi della lista
+    numero = len(diz[nome][materia]) #media = somma/numero di elementi
+
+    return round(tot/numero, 1) #ritorno la media arrotondata ai decimi
 
 
 #andiamo a definire un prototipo del dizionario delle classi
@@ -126,19 +127,19 @@ a=0 #variabile contatore ausiliaria
 i=0 #contatore del for
 z=0 #contatore aux 2
 materie = ['matematica', 'italiano', 'storia', 'inglese', 'informatica']
-medie=[]
+medie=[] #definisco le variabili che serviranno nel programma
 
 
 
 scelta = input("Scegliere la classe, M/H: ")
-print("")
+print("") #chiedo quale classe si vuole vedere
 
 
 
 
 if scelta == 'M': #scelta la tabella della 3m
 
-    nomi = classi['terza_m'].keys()
+    nomi = classi['terza_m'].keys() #nomi = lista dei cognomi degli alunni in 3m
 
     if a==0: #se ci troviamo al primo ciclo
 
@@ -158,7 +159,7 @@ if scelta == 'M': #scelta la tabella della 3m
           if z!='informatica':
             print( media(i, z, classi['terza_m']), end='                  ' )
 
-          else:
+          else: #se la materia è informatica non smetto di scrivere sulla stessa riga
               print(media(i, z, classi['terza_m']))
 
 else: #scelta la tabella della 3h
