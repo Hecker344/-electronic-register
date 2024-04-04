@@ -4,7 +4,7 @@ An electronic register build in python
 
 LIBRERIA DATETIME usabile
 
-fase di login —> Scorcioni
+fase di login + modulo —> Scorcioni
 
 gui (user friendly) —> Comastri
 
@@ -19,6 +19,8 @@ gui (user friendly) —> Comastri
 2 (studente) —> Comsatri
 
 3 (studente) —> Bonfatti
+
+COAGULAZIONE E OPERAZIONI DI LETTURA E SCRITTURA CSV —> Scorcioni
 
 SE ABBIAMO TEMPO
 
