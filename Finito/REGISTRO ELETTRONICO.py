@@ -38,8 +38,7 @@ def Andamento(classi,materia_prof,classe):
         print(cognome,"in",materia_prof,"non ha voti") #nel caso in qui lo studente non abbia voti:
 
 
-def Debito(classi):
-    materia_prof = "matematica"
+def Debito(classi,materia_prof):
     for x in classi:
         for y in classi[x]:
             voti=classi[x][y][materia_prof] #andiamo a fare tutti i possibili casi di studenti
@@ -47,9 +46,8 @@ def Debito(classi):
             if media < 6: # in caso in qui lo studente abbia la media inferiore al 6 lo stampiamo
                 print(y,"ha la media insufficente")
 
-def Pagella(aula):
-    classe = 'terza_m'
-    cognome = 'comastri'
+def Pagella(aula,classe):
+    cognome = input("Inserire il cognome dello studente di cui si vuole vedere la pagella:") #qui andiamo a prendere come input lo studente che si vuole analizzare
     medie = []
     materie = ['matematica','italiano','storia','informatica','inglese']
     if classe in aula and cognome in aula[classe]: #Controlliamo che lo studente esista
@@ -76,10 +74,10 @@ def Pagella(aula):
     plt.ylabel('Voti')
     plt.show()
 
-def media(nome, materia, classi, classe): #definisco la funzione che esegue la media di una materia
+def media(nome, materia, classi): #definisco la funzione che esegue la media di una materia
 
-    tot = sum(classi[classe][nome][materia]) #sommatoria degli elementi della lista
-    numero = len(classi[classe][nome][materia]) #media = somma/numero di elementi
+    tot = sum(classi[nome][materia]) #sommatoria degli elementi della lista
+    numero = len(classi[nome][materia]) #media = somma/numero di elementi
 
     return round(tot/numero, 1) #ritorno la media arrotondata ai decimi
 
@@ -276,16 +274,16 @@ def grafico_tre(mediasing): #creo la funzione del terzo grafico che chiede la me
     plt.axis('equal') #creo il grafico a torta
     plt.title('Numero di studenti totali presenti in determinati intervalli di voti')
     plt.show()
-def oscar():
+def oscar(classi,classe):
     a=0 #variabile contatore ausiliaria
     i=0 #contatore del for
     z=0 #contatore aux 2
     materie = ['matematica', 'italiano', 'storia', 'inglese', 'informatica']
     medie=[] #definisco le variabili che serviranno nel programma
-
-    scelta = input("Scegliere la classe, M/H: ")
-    print("") #chiedo quale classe si vuole vedere
-
+    if classe=='terza_m': #se stiamo usando la 3m
+        scelta = 'M'
+    else:
+        scelta='H' #se stiamo usando la 3h
     if scelta == 'M': #scelta la tabella della 3m
 
         nomi = classi['terza_m'].keys() #nomi = lista dei cognomi degli alunni in 3m
@@ -428,11 +426,11 @@ if scelt==0: #if condizionale per l'opzione
             elif j==3: #se l'utente inserisce l'opzione 3
                 Andamento(classi,materia,classe) #chiamo la funzione Andamento #FUNZIONA#
             elif j==4: #se l'utente inserisce l'opzione 4
-                Debito(classi) #chiamo la funzione Debito
+                Debito(classi,materia) #chiamo la funzione Debito #FUNZIONA#
             elif j==5: #se l'utente inserisce l'opzione 5
-                Pagella(classi) #chiamo la funzione Pagella
+                Pagella(classi,classe) #chiamo la funzione Pagella #FUNZIONA#
             elif j==6: #se l'utente inserisce l'opzione 6
-                oscar()
+                oscar(classi,classe) #FUNZIONA#
             elif j==7: #se l'utente inserisce l'opzione 7
                 j==7 #fine ciclo
                 print("Uscendo...")
