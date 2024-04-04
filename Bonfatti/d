@@ -1,1 +1,30 @@
-g
+import matplotlib.pyplot as plt
+
+comastri={
+
+    'italiano':[2,3,6,7],'storia':[6,8],'matematica':[5,8,9],'inglese':[6,7,8,4,2,1],'informatica':[5,6,7,1,2]
+}
+
+def andamento(studente):
+
+    indexinmeno=0
+
+    for materie in studente.keys():
+
+        while len(studente[materie])>5:
+
+            del studente[materie][5]
+
+        z=len(studente[materie])
+
+        print(z)
+
+        plt.plot(range(1, z+1), studente[materie], marker='o', linestyle='-', color='r')
+        plt.title('Andamento degli ultimi 5 voti delle materie')
+        plt.ylabel("Voto")
+        plt.xlabel(materie)
+        plt.grid(True)
+        plt.show()
+
+
+andamento(comastri)
