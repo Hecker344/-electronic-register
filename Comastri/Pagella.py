@@ -1,6 +1,6 @@
 def Pagella(aula):
-    classe = 'terza_h'
-    cognome = 'gazzotti'
+    classe = 'terza_m'
+    cognome = 'comastri'
     medie = []
     materie = ['matematica','italiano','storia','informatica','inglese']
     if classe in aula and cognome in aula[classe]: #Controlliamo che lo studente esista
@@ -13,7 +13,6 @@ def Pagella(aula):
             medie.append(media) #aggiungiamo il risultato media a una lista(medie)
     else:
         print("Cognome non trovato")#Nel caso in cui il cognome non esista comparirà un avviso
-    print(medie)
     colori=[]
     for z in medie:
         if z<=5.5: #utilizziamo una serie di if per attribuire a ogni voto un colore che verrà aggiunto a una lista(colori)
@@ -22,10 +21,8 @@ def Pagella(aula):
             colori.append('yellow')
         else:
             colori.append('green')
-    print(colori)
     plt.bar(materie,medie,color=colori) #utillizziamo matplot per creare un grafico a barre
     plt.title('Pagella')
     plt.xlabel('Materie')
     plt.ylabel('Voti')
     plt.show()
-    return medie
