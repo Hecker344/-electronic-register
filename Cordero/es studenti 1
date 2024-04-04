@@ -1,0 +1,181 @@
+import matplotlib.pyplot as plt
+
+classi = {
+
+    'terza_m': {
+        'ansaloni': {  # 1 stutente di 3m
+            'matematica': [4, 5.5], 'italiano': [6.7, 7.25], 'storia': [5, 6], 'inglese': [8, 8],
+            'informatica': [3, 4.5]
+        }
+        ,
+
+        'barchetti': {  # 2 stutente di 3m
+            'matematica': [7, 7.75], 'italiano': [8, 7.25], 'storia': [7, 7.5], 'inglese': [7, 6.5],
+            'informatica': [7.75, 7.25]
+        }
+
+        ,
+
+        'bonfatti': {  # 3 stutente di 3m
+            'matematica': [7, 8], 'italiano': [6.5, 7.25], 'storia': [10, 6.75], 'inglese': [8.75, 9.5],
+            'informatica': [10, 7]
+        }
+        ,
+
+        'brugnano': {  # 4 stutente di 3m
+            'matematica': [4, 5.5], 'italiano': [6.7, 7.3], 'storia': [5, 6], 'inglese': [8, 8], 'informatica': [3, 4.5]
+        }
+        ,
+
+        'bruni': {  # 5 stutente di 3m
+            'matematica': [4, 5.5], 'italiano': [6.7, 7.3], 'storia': [5, 6], 'inglese': [8, 8], 'informatica': [3, 4.5]
+        }
+        ,
+
+        'capponi': {  # 6 stutente di 3m
+            'matematica': [8, 7], 'italiano': [6.5, 7.25], 'storia': [8, 8.5], 'inglese': [7.75, 8.25],
+            'informatica': [10, 8]
+        }
+
+        ,
+
+        'cenolli': {  # 7 stutente di 3m
+            'matematica': [3, 6], 'italiano': [5.75, 6.25], 'storia': [6.25, 7], 'inglese': [4, 6],
+            'informatica': [6, 5.5]
+        }
+        ,
+
+        'crispino': {  # 8 stutente di 3m
+            'matematica': [3, 7.5], 'italiano': [5.25, 6], 'storia': [5.75, 6], 'inglese': [6, 6],
+            'informatica': [5, 4.5]
+        }
+        ,
+
+        'comastri': {  # 9 stutente di 3m
+            'matematica': [5, 6], 'italiano': [6.75, 6], 'storia': [5.75, 6], 'inglese': [7, 6.25],
+            'informatica': [5, 6.75]
+        }
+        ,
+
+        'demkollari': {  # 10 stutente di 3m
+            'matematica': [3, 5.5], 'italiano': [6, 6.5], 'storia': [7, 6.25], 'inglese': [8, 7.75],
+            'informatica': [7.25, 10]
+        }
+    }
+    ,
+
+    'terza_h': {
+
+        'scorcioni': {  # 1 stutente di 3h
+            'matematica': [3, 3.75], 'italiano': [6.25, 6.75], 'storia': [6, 7], 'inglese': [6, 6.5],
+            'informatica': [10, 6.75]
+        }
+        ,
+
+        'nappa': {  # 2 stutente di 3h
+            'matematica': [8, 6.5], 'italiano': [8, 7.5], 'storia': [8, 9], 'inglese': [7, 7], 'informatica': [7.5, 8]
+        }
+
+        ,
+
+        'serafini': {  # 3 stutente di 3h
+            'matematica': [7, 7.25], 'italiano': [8, 8.25], 'storia': [10, 7.25], 'inglese': [8.25, 7.75],
+            'informatica': [9, 7]
+        }
+        ,
+
+        'tagliavini': {  # 4 stutente di 3h
+            'matematica': [5.5, 6.75], 'italiano': [6.75, 7.5], 'storia': [6.75, 7.5], 'inglese': [7.25, 7],
+            'informatica': [4, 6]
+        }
+        ,
+
+        'lombardi': {  # 5 stutente di 3h
+            'matematica': [9, 7.5], 'italiano': [9, 8.5], 'storia': [8, 8.75], 'inglese': [9, 8], 'informatica': [8, 8]
+        }
+        ,
+
+        'merli': {  # 6 stutente di 3h
+            'matematica': [7.5, 8], 'italiano': [7, 7.25], 'storia': [6.5, 7.25], 'inglese': [4, 5],
+            'informatica': [7, 8]
+        }
+
+        ,
+
+        'napoletano': {  # 7 stutente di 3h
+            'matematica': [4, 5.5], 'italiano': [6, 5.75], 'storia': [6, 6.25], 'inglese': [6, 6], 'informatica': [5, 6]
+        }
+        ,
+
+        'cordero': {  # 8 stutente di 3h
+            'matematica': [5, 6.5], 'italiano': [6.7, 7.3], 'storia': [5, 6], 'inglese': [5, 5.75],
+            'informatica': [6, 6.5]
+        }
+        ,
+
+        'poppi': {  # 9 stutente di 3h
+            'matematica': [3, 4.5], 'italiano': [5.25, 6], 'storia': [5.5, 6], 'inglese': [4, 5.75],
+            'informatica': [4, 5.5]
+        }
+        ,
+
+        'gazzotti': {  # 10 stutente di 3h
+            'matematica': [7, 6.5], 'italiano': [7, 6.25], 'storia': [8, 7], 'inglese': [6.5, 7.5],
+            'informatica': [7, 8]
+        }
+    }
+}
+
+
+def andamento_materia():
+    print('1. matematica')
+    print('2. storia')
+    print('3. inglese')
+    print('4. italiano')
+    print('5. informatica')
+
+    classe = 'terza_h'
+    cognome = 'gazzotti'
+
+    opzione = int(input("Quale materia vuoi visualizzare"))
+
+    if opzione == 1:
+
+        mat = 'matematica'
+
+    elif opzione == 2:
+
+        mat = 'storia'
+
+    elif opzione == 3:
+
+        mat = 'inglese'
+
+
+    elif opzione == 4:
+
+        mat = 'italiano'
+
+    elif opzione == 5:
+
+        mat = 'informatica'
+
+    voti = classi[classe][cognome][mat]
+
+    print(voti)
+
+    plt.plot(range(1, len(voti) + 1), voti, marker="o", linestyle='-', color='r')
+
+    plt.title('materie')
+
+    plt.xlabel('Verifiche')
+
+    plt.ylabel('Voti')
+
+    plt.grid(True)
+
+    plt.show()
+
+
+andamento_materia()
+
