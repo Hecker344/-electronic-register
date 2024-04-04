@@ -186,7 +186,7 @@ def grafico_tre(mediasing):
         z+=1
 
 
-    plt.pie(intervalli, labels=nomiintervalli, colors=colori)
+    plt.pie(intervalli, labels=nomiintervalli, autopct = '%1.1f%%' colors=colori)
     plt.axis('equal')
     plt.title('Numero di studenti totali presenti in determinati intervalli di voti')
     plt.show()
