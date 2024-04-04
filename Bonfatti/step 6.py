@@ -1,48 +1,45 @@
 import matplotlib.pyplot as plt #importo matplotlib
 
-def media_dei_singoli(dizionarioclassi, subjects):
+def media_dei_singoli(dizionarioclassi, subjects): #funzione che calcola la media generale di ogni studente
 
-    tot=0
-    lista=[]
+    tot=0 #variabile che contiene la somma di tutti i voti di uno studente
     diz={
 
-        'terza_m':[]
+        'terza_m':[] #dizionario che contiene le medie degli studenti divisi per classe
         ,
         'terza_h': []
     }
 
-    primechiavi = dizionarioclassi.keys()
+    primechiavi = dizionarioclassi.keys() #primechiavi contiene le chiavi 'terza_m' e 'terza_h'
 
     for classe in primechiavi:
 
-        studenti = dizionarioclassi[classe].keys()
+        studenti = dizionarioclassi[classe].keys() #studenti = studenti della 3m o della 3h in base al valore di primechiavi
 
         for nome in studenti:
 
-            tot=0
-            voti=0
+            voti=0 #numero di voti per studente
 
             for mat in subjects:
 
-                tot = tot + sum(dizionarioclassi[classe][nome][mat])
+                tot = tot + sum(dizionarioclassi[classe][nome][mat]) #sommatoria dei voti
 
-                voti = voti + len(dizionarioclassi[classe][nome][mat])
+                voti = voti + len(dizionarioclassi[classe][nome][mat]) #contatore dei voti
 
-            tot = round(tot/voti, 1)
+            tot = round(tot/voti, 1) #la sommatoria diventa la media e viene approssimata ai decimi
 
             if classe == 'terza_m':
 
-                diz['terza_m'].append(tot)
+                diz['terza_m'].append(tot) #in base alla chiave in uso inserisco la media nella class relativa
 
             elif classe == 'terza_h':
 
                 diz['terza_h'].append(tot)
 
-    return diz
+    return diz #ritorno il dizionario delle medie
 
-def media_delle_classi(dizionarioclassi, subjects):
+def media_delle_classi(dizionarioclassi, subjects): #funzione che definisce la media totale di una classe
 
-    tot = 0
     lista = []
 
     primechiavi = dizionarioclassi.keys()
@@ -51,30 +48,30 @@ def media_delle_classi(dizionarioclassi, subjects):
 
         studenti = dizionarioclassi[classe].keys()
 
-        tot = 0
+        tot = 0 #in questo caso dobbiamo spostare alcuni comandi di qualche for indietro per non azzerare le variabili troppo presto
         voti = 0
 
         for nome in studenti:
 
             for mat in subjects:
 
-                tot = tot + sum(dizionarioclassi[classe][nome][mat])
+                tot = tot + sum(dizionarioclassi[classe][nome][mat]) #la somma continua e non viene mai azzerata, vale anche per il contatore di voti
 
                 voti = voti + len(dizionarioclassi[classe][nome][mat])
 
-        tot = round(tot / voti, 1)
+        tot = round(tot / voti, 1) #una volta che gli studenti di una classe sono stati tutti contati viene eseguita la media e aggiunta alla lista delle medie totali per classe
 
         lista.append(tot)
 
-    return lista
+    return lista #ritorno la lista totale
 
-def grafico_uno(mediatot):
+def grafico_uno(mediatot): #funzione del primo grafico che richiede solo la media totale
 
     titoli = ['Media Generale 3^M','Media Generale 3^H']
 
     colori = ['green', 'blue']
 
-    plt.bar(titoli, mediatot, color=colori)
+    plt.bar(titoli, mediatot, color=colori) #definisco le caratteristiche ed i parametri parametri del grafico a barre
 
     plt.title('Confronto della media di 2 classi')
 
@@ -83,27 +80,27 @@ def grafico_uno(mediatot):
 
     plt.show()
 
-def grafico_due(mediasing):
+def grafico_due(mediasing): #grafico 2 che richiede la media dei singolari studenti
 
-    insufficienti_terza_m=0
+    insufficienti_terza_m=0 #2 variabili che conterranno il rispettivo numero di alunni con una media generale inferiore al 6
     insufficienti_terza_h=0
 
-    for k in mediasing.keys():
+    for k in mediasing.keys(): #k assume il valore della chiave 3m o della chiave 3h che permette di accedere alle relative medie
 
         for counter in mediasing[k]:
 
-            if counter<6 and k=='terza_m':
+            if counter<6 and k=='terza_m': #se la media è inferiore al 6 e stiamo usando la 3m andiamo ad incrementare il counter degli studenti insufficienti in 3m di 1
 
                 insufficienti_terza_m+=1
 
-            elif counter<6 and k=='terza_h':
+            elif counter<6 and k=='terza_h': #se la media è inferiore al 6 e stiamo usando la 3h andiamo ad incrementare il counter degli studenti insufficienti in 3h di 1
 
                 insufficienti_terza_h+=1
 
 
     insufficientitot=[]
 
-    insufficientitot.append(insufficienti_terza_m)
+    insufficientitot.append(insufficienti_terza_m) #andiamo ad aggiungere i 2 contatori degli insufficienti in una sola lista
 
     insufficientitot.append(insufficienti_terza_h)
 
@@ -112,20 +109,20 @@ def grafico_due(mediasing):
     plt.bar(titoli, insufficientitot, color=['red','red'])
 
 
-    plt.title('Confronto del numero di insufficienti delle due 2 classi')
+    plt.title('Confronto del numero di insufficienti delle due 2 classi') #definisco il grafico a barre degli insufficienti e lo mostro
 
     plt.xlabel('Classi')
     plt.ylabel('Numero di insufficienti')
 
     plt.show()
 
-def grafico_tre(mediasing):
+def grafico_tre(mediasing): #creo la funzione del terzo grafico che chiede la media dei singoli studenti
 
-    intervalli = [ 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ]
+    intervalli = [ 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] #creo la lista degli intervalli, che contiene per ogni intervallo un contatore degli studenti che rientrano in quell'intervallo
 
     for k in mediasing.keys():
 
-        for counter in mediasing[k]:
+        for counter in mediasing[k]: #vado a ciclare le medie degli studenti
 
             if counter<2:
 
@@ -135,7 +132,7 @@ def grafico_tre(mediasing):
 
                 intervalli[1]+=1
 
-            elif counter >= 3 and counter < 4:
+            elif counter >= 3 and counter < 4: #è come uno switch case, se la media rientra in un intervallo viene incrementato il relativo contatore, sennò si passa all'intervallo successivo
 
                 intervalli[2]+=1
 
@@ -163,14 +160,14 @@ def grafico_tre(mediasing):
 
                 intervalli[8]+=1
 
-    indexdaeliminare=[]
+    indexdaeliminare=[] #creo la lista degli intervalli da eliminare poiché vuoti
 
 
     for var in range(len(intervalli)):
 
         if intervalli[var]==0:
              #mi salvo tutti gli indici della lista degli intervalli di voti che sono senza studenti così li elimino
-            indexdaeliminare.append(var)
+            indexdaeliminare.append(var) #salvo l'indice dell'intervallo che vale 0
 
 
     colori = ['red','red','red','red','yellow','green','green','green','green']
@@ -178,16 +175,16 @@ def grafico_tre(mediasing):
     nomiintervalli = ['Inferiori al 2','Compresi tra il 2 ed il 3','Compresi tra il 3 ed il 4','Compresi tra il 4 ed il 5','Compresi tra il 5 ed il 6','Compresi tra il 6 ed il 7','Compresi tra il 7 e 8','Compresi tra 8 e 9','Compresi tra il 9 ed il 10']
 
     z=0
-
+    #variabile ausiliaria z
     for k in indexdaeliminare:
         del intervalli[k-z]
-        del colori[k-z]
+        del colori[k-z] #elimino gli elementi che si riferiscono all'intervallo da eliminare tramite lo stesso indice - Z, che è una variabile che tiene conto anche di quanti indici sono stati rimossi e quindi aiuterà a rimuovere indici sempre esistenti e non esistenti, ad esemepio se rimuovo l'indice 1, la lista si accorcia di 1 e quindi l'indice che prima era 8 diventa 7 e diventa necessario ridurre l'indice da rimuovere di 1
         del nomiintervalli[k-z]
         z+=1
 
 
-    plt.pie(intervalli, labels=nomiintervalli, autopct = '%1.1f%%' colors=colori)
-    plt.axis('equal')
+    plt.pie(intervalli, labels=nomiintervalli, autopct='%1.1f%%', colors=colori)
+    plt.axis('equal') #creo il grafico a torta
     plt.title('Numero di studenti totali presenti in determinati intervalli di voti')
     plt.show()
 
@@ -306,6 +303,15 @@ classi = {
 materie = ['matematica', 'italiano', 'storia', 'inglese', 'informatica']
 
 #occorre ottenere la media generale di ambo le classi, e quella degli studenti singoli
+#serve una lista di medie della 3m, della 3h, una della generale totale in 3m, una della generale totale della 3h
+
+mediasingoli = media_dei_singoli(classi, materie)
+
+grafico_uno( media_delle_classi(classi, materie) )
+
+grafico_due(mediasingoli) #chiamo tutte le funzioni
+
+grafico_tre(mediasingoli)
 #serve una lista di medie della 3m, della 3h, una della generale totale in 3m, una della generale totale della 3h
 
 mediasingoli = media_dei_singoli(classi, materie)
