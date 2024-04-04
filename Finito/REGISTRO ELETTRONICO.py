@@ -46,8 +46,7 @@ def Debito(classi,materia_prof):
             if media < 6: # in caso in qui lo studente abbia la media inferiore al 6 lo stampiamo
                 print(y,"ha la media insufficente")
 
-def Pagella(aula,classe):
-    cognome = input("Inserire il cognome dello studente di cui si vuole vedere la pagella:") #qui andiamo a prendere come input lo studente che si vuole analizzare
+def Pagella(aula,classe,cognome):
     medie = []
     materie = ['matematica','italiano','storia','informatica','inglese']
     if classe in aula and cognome in aula[classe]: #Controlliamo che lo studente esista
@@ -355,6 +354,67 @@ def oscar(classi,classe):
 
     grafico_tre(mediasingoli)
 
+
+def andamento_materia(classi,classe,nomut):   # definisco una funzione per l'andamento della materia
+    cognome = nomut
+    opzione = int(input("Quale materia vuoi visualizzare\n1. Matematica\n2. Storia\n3. Inglese\n4. Italiano\n5. Informatica"))  # si richiede all'utente di scegliere una materia  stampa le materie nella quale posso visualizzare l'andamento
+
+    if opzione == 1:       # assegna a materia in base alla scelta del dell'utente
+
+        mat = 'matematica'
+
+    elif opzione == 2:
+
+        mat = 'storia'
+
+    elif opzione == 3:
+
+        mat = 'inglese'
+
+
+    elif opzione == 4:
+
+        mat = 'italiano'
+
+    elif opzione == 5:
+
+        mat = 'informatica'
+
+    voti = classi[classe][cognome][mat]   # ottengo i voti dello studente per la materia selezionata
+
+    print(voti)  #stampo i voti 
+
+    plt.plot(range(1, len(voti) + 1), voti, marker="o", linestyle='-', color='r')  # crea un grafico dove il primo argomento è l'asse delle x e il secondo è l'asse delle y
+
+    plt.title('materie')  # titoli delle materie
+
+    plt.xlabel('Verifiche')   # etichetta sull'asse delle x
+
+    plt.ylabel('Voti')   # etichetta sull'asse della y
+
+    plt.grid(True)   # attiva la griglia del grafico
+
+    plt.show()  # mostra il grafico
+
+def andamento5voti(studente):
+
+    for materie in studente.keys():
+
+        while len(studente[materie])>5:
+
+            del studente[materie][5] #tramite i for ed i delete riduco a 5 o meno il numero di voti per ogni materia da inserire nel grafico
+
+        z=len(studente[materie]) #questo è il range da usare per il grafico lineare, corrispondente al numero di voti per materia
+
+
+        plt.plot(range(1, z+1), studente[materie], marker='o', linestyle='-', color='r')
+        plt.title('Andamento degli ultimi 5 voti delle materie')
+        plt.ylabel("Voto")
+        plt.xlabel(materie) #ad ogni ciclo mostro il grafico relativo alla materia che il ciclo sta usando in quel momento
+        plt.grid(True)
+        plt.show()
+
+
 def scrittura(classi):
     with open('classi.csv', 'w', newline='') as f:
         writer = csv.writer(f) 
@@ -402,9 +462,6 @@ scelt=int(input("Se sei un prof premi 0, se sei uno studente premi 1: ")) #scelt
 if scelt==0: #if condizionale per l'opzione
     nomut=input("Inserisci il nome utente: ") #input nome utente
     psw=input("Inserisci la password: ") #input password
-    mat=[{'prof':{'Gino': ['matematica', 'terza_h'], 'eino': ['informatica', 'terza_m'], 'wino': ['inglese', 'terza_h']}},{"none":{}}]
-    dtc.write(mat,'prof')
-    mat=[]
     mat=dtc.read('prof')
     if mat[0]['prof'][nomut][1]=="terza_m":
         classe="terza_m"
@@ -428,7 +485,8 @@ if scelt==0: #if condizionale per l'opzione
             elif j==4: #se l'utente inserisce l'opzione 4
                 Debito(classi,materia) #chiamo la funzione Debito #FUNZIONA#
             elif j==5: #se l'utente inserisce l'opzione 5
-                Pagella(classi,classe) #chiamo la funzione Pagella #FUNZIONA#
+                cognome = input("Inserire il cognome dello studente di cui si vuole vedere la pagella:") #qui andiamo a prendere come input lo studente che si vuole analizzare
+                Pagella(classi,classe,cognome) #chiamo la funzione Pagella #FUNZIONA#
             elif j==6: #se l'utente inserisce l'opzione 6
                 oscar(classi,classe) #FUNZIONA#
             elif j==7: #se l'utente inserisce l'opzione 7
@@ -443,13 +501,26 @@ if scelt==0: #if condizionale per l'opzione
 elif scelt==1:
     nomut=input("Inserisci il nome utente: ")
     psw=input("Inserisci la password: ")
-    if nomut==login[0]['studenti'][nomut][0] and psw==login[1]['studenti'][nomut][1]: #controllo nome utente e password studente
+    mat=dtc.read('prof')
+    classe=mat[1]['studenti'][nomut][1]
+    if nomut==login[1]['studenti'][nomut][0] and psw==login[1]['studenti'][nomut][1]: #controllo nome utente e password studente
         print("Login eseguito!")
-
-
-
-
-
+        j=0
+        while j!=4: #ciclo che ripete fino a quando l'utente non inserisce l'opzione 7
+            print("Ecco la lista di opzioni che hai a disposizione\n1. Vedi l'andamento\n2. Visualizzazione pagella\n3. Andamento ultimi 5 voti\n4. Esci")
+            j=int(input("Inserisci un'opzione: ")) #input scelta
+            if j==1: #se l'utente inserisce l'opzione 1
+                andamento_materia(classi,classe,nomut) #chiamo la funzione nuovo_studente #FUNZIONA#
+            elif j==2: #se l'utente inserisce l'opzione 2
+                Pagella(classi,classe,nomut)
+            elif j==3: #se l'utente inserisce l'opzione 3
+                andamento5voti(classi[classe][nomut])
+            elif j==4: #se l'utente inserisce l'opzione 7
+                j==4 #fine ciclo
+                print("Uscendo...")
+                scrittura(classi) #chiamo la funzione scrittura
+                esc="login"
+                login=dtc.write(login,esc) #ripristino il login 
     else:
         print("Login non eseguito, password o nome utente non corretto!")
 else:
