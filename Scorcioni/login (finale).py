@@ -1,5 +1,5 @@
 import datetime as dt
-import readdictcsv as redict
+import dictcsv(login) as redict
 login=[
     {
         'prof':{
