@@ -443,6 +443,22 @@ def lettura():
             studente_dict[materia] = voti         
     return classi   
 
+def test(classi,login,mat):
+        cognome='gazzotti'
+        classe='terza_m'
+        materia='informatica'
+        print('parte PROF')
+        classi, login, mat = nuovo_studente(classi, login, classe, mat)
+        classi = nuovo_voto(classi, materia, classe)
+        Andamento(classi, materia, classe)
+        Debito(classi, materia)
+        Pagella(classi, classe, cognome)
+        oscar(classi, classe)
+        print('\n\n\nparte studente')
+        andamento_materia(classi, classe, cognome)
+        Pagella(classi, classe, cognome)
+        andamento5voti(classi[classe][cognome])
+
 classi=lettura()
 
 login=dtc.read("login")
@@ -478,6 +494,8 @@ if scelt==0: #if condizionale per l'opzione
                 Pagella(classi,classe,cognome) #chiamo la funzione Pagella #FUNZIONA#
             elif j==6: #se l'utente inserisce l'opzione 6
                 oscar(classi,classe) #FUNZIONA#
+            elif j == 8:  # se l'utente inserisce l'opzione 6
+                test(classi, login,mat)  # FUNZIONA#
             elif j==7: #se l'utente inserisce l'opzione 7
                 j==7 #fine ciclo
                 print("Uscendo...")
