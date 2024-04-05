@@ -3,7 +3,7 @@ import dictcsv as dtc
 import matplotlib.pyplot as plt
 import csv
 
-def nuovo_studente(classi,login,classe):   # questa riga definisce la funzione nuovo_studenti
+def nuovo_studente(classi,login,classe,mat):   # questa riga definisce la funzione nuovo_studenti
     cognome = str(input("Inserire il cognome dello studente da aggiungere:")) # inserimento del cognome dello studente
     password = str(input("Inserire la password dello studente da aggiungere:")) # inserimento della password dello studente
     classi[classe][cognome]={}
@@ -13,7 +13,8 @@ def nuovo_studente(classi,login,classe):   # questa riga definisce la funzione n
     classi[classe][cognome]['inglese'] = []
     classi[classe][cognome]['informatica'] = [] # questa riga aggiunge il cognome al dizionario classi
     login[1]['studenti'][cognome] = [cognome,password]
-    return classi,login  # restituisce il dizionario con lo studente aggiunto
+    mat[1]['studenti'][cognome]=[0,classe]
+    return classi,login,mat  # restituisce il dizionario con lo studente aggiunto
 
 
 def nuovo_voto(aule,materia,classe): # definisco la funzione nuovo_voto 
@@ -88,7 +89,6 @@ def media(nome, materia, classi): #definisco la funzione che esegue la media di 
 
 def media_dei_singoli(classi, subjects): #funzione che calcola la media generale di ogni studente
 
-    tot=0 #variabile che contiene la somma di tutti i voti di uno studente
     diz={
 
         'terza_m':[] #dizionario che contiene le medie degli studenti divisi per classe
@@ -105,7 +105,7 @@ def media_dei_singoli(classi, subjects): #funzione che calcola la media generale
         for nome in studenti:
 
             voti=0 #numero di voti per studente
-
+            tot = 0  # variabile che contiene la somma di tutti i voti di uno studente
             for mat in subjects:
 
                 tot = tot + sum(classi[classe][nome][mat]) #sommatoria dei voti
@@ -344,20 +344,10 @@ def oscar(classi,classe):
     grafico_due(mediasingoli) #chiamo tutte le funzioni
 
     grafico_tre(mediasingoli)
-    #serve una lista di medie della 3m, della 3h, una della generale totale in 3m, una della generale totale della 3h
-
-    mediasingoli = media_dei_singoli(classi, materie)
-
-    grafico_uno( media_delle_classi(classi, materie) )
-
-    grafico_due(mediasingoli)
-
-    grafico_tre(mediasingoli)
-
 
 def andamento_materia(classi,classe,nomut):   # definisco una funzione per l'andamento della materia
     cognome = nomut
-    opzione = int(input("Quale materia vuoi visualizzare\n1. Matematica\n2. Storia\n3. Inglese\n4. Italiano\n5. Informatica"))  # si richiede all'utente di scegliere una materia  stampa le materie nella quale posso visualizzare l'andamento
+    opzione = int(input("Quale materia vuoi visualizzare\n1. Matematica\n2. Storia\n3. Inglese\n4. Italiano\n5. Informatica\nInserisci un'opzione: "))  # si richiede all'utente di scegliere una materia  stampa le materie nella quale posso visualizzare l'andamento
 
     if opzione == 1:       # assegna a materia in base alla scelta del dell'utente
 
@@ -386,7 +376,7 @@ def andamento_materia(classi,classe,nomut):   # definisco una funzione per l'and
 
     plt.plot(range(1, len(voti) + 1), voti, marker="o", linestyle='-', color='r')  # crea un grafico dove il primo argomento è l'asse delle x e il secondo è l'asse delle y
 
-    plt.title('materie')  # titoli delle materie
+    plt.title(mat)  # titoli delle materie
 
     plt.xlabel('Verifiche')   # etichetta sull'asse delle x
 
@@ -448,7 +438,6 @@ def lettura():
                     voti.append(float(x))
 
             #voti = [float(x) for x in row[col_voti].split(',')]
-
             classe_dict = classi.setdefault(classe, {})
             studente_dict = classe_dict.setdefault(studente, {})
             studente_dict[materia] = voti         
@@ -477,7 +466,7 @@ if scelt==0: #if condizionale per l'opzione
             print("Ecco la lista di opzioni che hai a disposizione\n1. Nuovo studente\n2. Nuovo voto\n3. Andamento studente\n4. Debito\n5. Scrutinio\n6. Confronto\n7. Esci")
             j=int(input("Inserisci un'opzione: ")) #input scelta
             if j==1: #se l'utente inserisce l'opzione 1
-                classi,login=nuovo_studente(classi,login,classe) #chiamo la funzione nuovo_studente #FUNZIONA#
+                classi,login,mat=nuovo_studente(classi,login,classe,mat) #chiamo la funzione nuovo_studente #FUNZIONA#
             elif j==2: #se l'utente inserisce l'opzione 2
                 classi=nuovo_voto(classi,materia,classe) #chiamo la funzione nuovo_voto #FUNZIONA#
             elif j==3: #se l'utente inserisce l'opzione 3
@@ -494,7 +483,8 @@ if scelt==0: #if condizionale per l'opzione
                 print("Uscendo...")
                 scrittura(classi) #chiamo la funzione scrittura
                 esc="login"
-                login=dtc.write(login,esc) #ripristino il login
+                dtc.write(login,esc) #ripristino il login
+                dtc.write(mat,'prof')
     else:
         print("Login non eseguito, password o nome utente non corretto!")
 
