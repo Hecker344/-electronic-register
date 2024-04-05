@@ -388,21 +388,18 @@ def andamento_materia(classi,classe,nomut):   # definisco una funzione per l'and
 
 def andamento5voti(studente):
 
-    for materie in studente.keys():
+    ultimivoti=[]
 
-        while len(studente[materie])>5:
+    for materie in studente.keys(): #for di controllo, siccom è richiesto che i voti da analizzare non siano superiori a 5, andiamo a ridurre i voti ad un massimo di 5 per materia, questo accade solo nella funzione quindi i voti reali non cambiano
 
-            del studente[materie][5] #tramite i for ed i delete riduco a 5 o meno il numero di voti per ogni materia da inserire nel grafico
+        ultimivoti.append( studente[materie][len(studente[materie])-1]) #da ogni materia prendo l'ultimo voto
 
-        z=len(studente[materie]) #questo è il range da usare per il grafico lineare, corrispondente al numero di voti per materia
-
-
-        plt.plot(range(1, z+1), studente[materie], marker='o', linestyle='-', color='r')
-        plt.title('Andamento degli ultimi 5 voti delle materie')
-        plt.ylabel("Voto")
-        plt.xlabel(materie) #ad ogni ciclo mostro il grafico relativo alla materia che il ciclo sta usando in quel momento
-        plt.grid(True)
-        plt.show()
+    plt.plot(range(1, 6), ultimivoti, marker='o', linestyle='-', color='r') #z+1 perché nel range 1,5 non ci sono 5 intervalli ma 4 per averne 5 devo fare 5(z)+1
+    plt.title('Andamento degli ultimi 5 voti delle materie')
+    plt.ylabel("Voto")
+    plt.xlabel("Ultimi 5 voti") #ad ogni ciclo mostro il grafico relativo alla materia che il ciclo sta usando in quel momento
+    plt.grid(True)
+    plt.show()
 
 
 def scrittura(classi):
@@ -505,7 +502,7 @@ while scelt!=2:
                     dtc.write(mat,'prof')
         else:
             print("Login non eseguito, password o nome utente non corretto!")
-    
+
     elif scelt==1:
         nomut=input("Inserisci il nome utente: ")
         psw=input("Inserisci la password: ")
@@ -528,7 +525,7 @@ while scelt!=2:
                     print("Uscendo...")
                     scrittura(classi) #chiamo la funzione scrittura
                     esc="login"
-                    login=dtc.write(login,esc) #ripristino il login 
+                    login=dtc.write(login,esc) #ripristino il login
         else:
             print("Login non eseguito, password o nome utente non corretto!")
     elif scelt == 2:
