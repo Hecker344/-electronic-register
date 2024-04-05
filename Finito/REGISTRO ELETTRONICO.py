@@ -460,76 +460,79 @@ def test(classi,login,mat):
         andamento5voti(classi[classe][cognome])
 
 classi=lettura()
-
+scelt=0
 login=dtc.read("login")
-
-scelt=int(input("Se sei un prof premi 0, se sei uno studente premi 1: ")) #scelta in input dall'utente se prof o studente
-if scelt==0: #if condizionale per l'opzione
-    nomut=input("Inserisci il nome utente: ") #input nome utente
-    psw=input("Inserisci la password: ") #input password
-    mat=dtc.read('prof')
-    if mat[0]['prof'][nomut][1]=="terza_m":
-        classe="terza_m"
-        materia=mat[0]['prof'][nomut][0]
+while scelt!=2:
+    scelt=int(input("Opzioni disponibili:\n0. Login prof\n1. Login studente\n2. Termina programma\n Inserisci un'opzione: ")) #scelta in input dall'utente se prof o studente
+    if scelt==0: #if condizionale per l'opzione
+        nomut=input("Inserisci il nome utente: ") #input nome utente
+        psw=input("Inserisci la password: ") #input password
+        mat=dtc.read('prof')
+        if mat[0]['prof'][nomut][1]=="terza_m":
+            classe="terza_m"
+            materia=mat[0]['prof'][nomut][0]
+        else:
+            classe="terza_h"
+            materia=mat[0]['prof'][nomut][0]
+        print(materia)
+        if nomut==login[0]['prof'][nomut][0] and psw==login[0]['prof'][nomut][1]: #controllo nome utente e password prof
+            print("Login eseguito!")
+            j=0
+            while j!=7: #ciclo che ripete fino a quando l'utente non inserisce l'opzione 7
+                print("Ecco la lista di opzioni che hai a disposizione\n1. Nuovo studente\n2. Nuovo voto\n3. Andamento studente\n4. Debito\n5. Scrutinio\n6. Confronto\n7. Esci")
+                j=int(input("Inserisci un'opzione: ")) #input scelta
+                if j==1: #se l'utente inserisce l'opzione 1
+                    classi,login,mat=nuovo_studente(classi,login,classe,mat) #chiamo la funzione nuovo_studente #FUNZIONA#
+                elif j==2: #se l'utente inserisce l'opzione 2
+                    classi=nuovo_voto(classi,materia,classe) #chiamo la funzione nuovo_voto #FUNZIONA#
+                elif j==3: #se l'utente inserisce l'opzione 3
+                    Andamento(classi,materia,classe) #chiamo la funzione Andamento #FUNZIONA#
+                elif j==4: #se l'utente inserisce l'opzione 4
+                    Debito(classi,materia) #chiamo la funzione Debito #FUNZIONA#
+                elif j==5: #se l'utente inserisce l'opzione 5
+                    cognome = input("Inserire il cognome dello studente di cui si vuole vedere la pagella:") #qui andiamo a prendere come input lo studente che si vuole analizzare
+                    Pagella(classi,classe,cognome) #chiamo la funzione Pagella #FUNZIONA#
+                elif j==6: #se l'utente inserisce l'opzione 6
+                    oscar(classi,classe) #FUNZIONA#
+                elif j == 8:  # se l'utente inserisce l'opzione 6
+                    test(classi, login,mat)  # FUNZIONA#
+                elif j==7: #se l'utente inserisce l'opzione 7
+                    j==7 #fine ciclo
+                    print("Uscendo...")
+                    scrittura(classi) #chiamo la funzione scrittura
+                    esc="login"
+                    dtc.write(login,esc) #ripristino il login
+                    dtc.write(mat,'prof')
+        else:
+            print("Login non eseguito, password o nome utente non corretto!")
+    
+    elif scelt==1:
+        nomut=input("Inserisci il nome utente: ")
+        psw=input("Inserisci la password: ")
+        mat=dtc.read('prof')
+        classe=mat[1]['studenti'][nomut][1]
+        if nomut==login[1]['studenti'][nomut][0] and psw==login[1]['studenti'][nomut][1]: #controllo nome utente e password studente
+            print("Login eseguito!")
+            j=0
+            while j!=4: #ciclo che ripete fino a quando l'utente non inserisce l'opzione 7
+                print("Ecco la lista di opzioni che hai a disposizione\n1. Vedi l'andamento\n2. Visualizzazione pagella\n3. Andamento ultimi 5 voti\n4. Esci")
+                j=int(input("Inserisci un'opzione: ")) #input scelta
+                if j==1: #se l'utente inserisce l'opzione 1
+                    andamento_materia(classi,classe,nomut) #chiamo la funzione nuovo_studente #FUNZIONA#
+                elif j==2: #se l'utente inserisce l'opzione 2
+                    Pagella(classi,classe,nomut)
+                elif j==3: #se l'utente inserisce l'opzione 3
+                    andamento5voti(classi[classe][nomut])
+                elif j==4: #se l'utente inserisce l'opzione 7
+                    j==4 #fine ciclo
+                    print("Uscendo...")
+                    scrittura(classi) #chiamo la funzione scrittura
+                    esc="login"
+                    login=dtc.write(login,esc) #ripristino il login 
+        else:
+            print("Login non eseguito, password o nome utente non corretto!")
+    elif scelt == 2:
+        print("Terminando programma...")
+        scelt=2
     else:
-        classe="terza_h"
-        materia=mat[0]['prof'][nomut][0]
-    print(materia)
-    if nomut==login[0]['prof'][nomut][0] and psw==login[0]['prof'][nomut][1]: #controllo nome utente e password prof
-        print("Login eseguito!")
-        j=0
-        while j!=7: #ciclo che ripete fino a quando l'utente non inserisce l'opzione 7
-            print("Ecco la lista di opzioni che hai a disposizione\n1. Nuovo studente\n2. Nuovo voto\n3. Andamento studente\n4. Debito\n5. Scrutinio\n6. Confronto\n7. Esci")
-            j=int(input("Inserisci un'opzione: ")) #input scelta
-            if j==1: #se l'utente inserisce l'opzione 1
-                classi,login,mat=nuovo_studente(classi,login,classe,mat) #chiamo la funzione nuovo_studente #FUNZIONA#
-            elif j==2: #se l'utente inserisce l'opzione 2
-                classi=nuovo_voto(classi,materia,classe) #chiamo la funzione nuovo_voto #FUNZIONA#
-            elif j==3: #se l'utente inserisce l'opzione 3
-                Andamento(classi,materia,classe) #chiamo la funzione Andamento #FUNZIONA#
-            elif j==4: #se l'utente inserisce l'opzione 4
-                Debito(classi,materia) #chiamo la funzione Debito #FUNZIONA#
-            elif j==5: #se l'utente inserisce l'opzione 5
-                cognome = input("Inserire il cognome dello studente di cui si vuole vedere la pagella:") #qui andiamo a prendere come input lo studente che si vuole analizzare
-                Pagella(classi,classe,cognome) #chiamo la funzione Pagella #FUNZIONA#
-            elif j==6: #se l'utente inserisce l'opzione 6
-                oscar(classi,classe) #FUNZIONA#
-            elif j == 8:  # se l'utente inserisce l'opzione 6
-                test(classi, login,mat)  # FUNZIONA#
-            elif j==7: #se l'utente inserisce l'opzione 7
-                j==7 #fine ciclo
-                print("Uscendo...")
-                scrittura(classi) #chiamo la funzione scrittura
-                esc="login"
-                dtc.write(login,esc) #ripristino il login
-                dtc.write(mat,'prof')
-    else:
-        print("Login non eseguito, password o nome utente non corretto!")
-
-elif scelt==1:
-    nomut=input("Inserisci il nome utente: ")
-    psw=input("Inserisci la password: ")
-    mat=dtc.read('prof')
-    classe=mat[1]['studenti'][nomut][1]
-    if nomut==login[1]['studenti'][nomut][0] and psw==login[1]['studenti'][nomut][1]: #controllo nome utente e password studente
-        print("Login eseguito!")
-        j=0
-        while j!=4: #ciclo che ripete fino a quando l'utente non inserisce l'opzione 7
-            print("Ecco la lista di opzioni che hai a disposizione\n1. Vedi l'andamento\n2. Visualizzazione pagella\n3. Andamento ultimi 5 voti\n4. Esci")
-            j=int(input("Inserisci un'opzione: ")) #input scelta
-            if j==1: #se l'utente inserisce l'opzione 1
-                andamento_materia(classi,classe,nomut) #chiamo la funzione nuovo_studente #FUNZIONA#
-            elif j==2: #se l'utente inserisce l'opzione 2
-                Pagella(classi,classe,nomut)
-            elif j==3: #se l'utente inserisce l'opzione 3
-                andamento5voti(classi[classe][nomut])
-            elif j==4: #se l'utente inserisce l'opzione 7
-                j==4 #fine ciclo
-                print("Uscendo...")
-                scrittura(classi) #chiamo la funzione scrittura
-                esc="login"
-                login=dtc.write(login,esc) #ripristino il login 
-    else:
-        print("Login non eseguito, password o nome utente non corretto!")
-else:
-    print("opzione non esistente")
+        print("opzione non esistente")
